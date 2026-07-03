@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Social Sector Of Tarlac Province</title>
+<style>
+:root{
+  --c-primary:#0f6b5c;
+  --c-primary-dk:#094d42;
+  --c-primary-lt:#e6f4f1;
+  --c-accent:#16a34a;
+  --c-accent-lt:#dcfce7;
+  --c-blue:#1d4ed8;
+  --c-blue-lt:#dbeafe;
+  --c-amber:#d97706;
+  --c-amber-lt:#fef3c7;
+  --c-danger:#dc2626;
+  --c-danger-lt:#fee2e2;
+  --c-bg:#f1f5f4;
+  --c-surface:#ffffff;
+  --c-border:#e2e8f0;
+  --c-text:#0f172a;
+  --c-text-2:#334155;
+  --c-text-muted:#64748b;
+  --sidebar-w:256px;
+  --r-card:18px;
+  --r-sm:10px;
+  --shadow-card:0 4px 20px rgba(15,23,42,.07);
+  --shadow-float:0 12px 40px rgba(15,23,42,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  background:var(--c-bg);
+  color:var(--c-text);
+  display:flex;
+  min-height:100vh;
+}
+a{text-decoration:none;color:inherit}
+button,input,select{font-family:inherit}
+button{cursor:pointer}
+.sidebar{
+  position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;
+  background:var(--c-surface);border-right:1px solid var(--c-border);
+  display:flex;flex-direction:column;overflow-y:auto;z-index:500;
+  transition:transform .28s ease;
+}
+.sidebar-logo{display:flex;align-items:center;gap:10px;padding:18px 16px 14px;border-bottom:1px solid var(--c-border)}
+.sidebar-logo-img{width:40px;height:40px;border-radius:50%;object-fit:contain;background:var(--c-primary-lt);border:2px solid var(--c-primary);flex-shrink:0}
+.sidebar-logo-text strong{display:block;font-size:13px;font-weight:800;color:var(--c-primary-dk)}
+.sidebar-logo-text span{font-size:11px;color:var(--c-text-muted)}
+.sidebar-search{margin:12px 14px;display:flex;align-items:center;gap:8px;background:var(--c-bg);border:1px solid var(--c-border);border-radius:var(--r-sm);padding:9px 12px}
+.sidebar-search input{border:0;outline:0;background:transparent;font-size:13px;width:100%;color:var(--c-text)}
+.sidebar-nav{padding:4px 10px 18px;flex:1}
+.nav-label{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--c-text-muted);padding:14px 8px 4px}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:var(--r-sm);font-size:13px;font-weight:600;color:var(--c-text-2);transition:.15s}
+.nav-item:hover,.nav-item.active{background:var(--c-primary-lt);color:var(--c-primary-dk)}
+.nav-item .icon{font-size:16px;flex-shrink:0}
+.nav-divider{border:none;border-top:1px dashed var(--c-border);margin:8px 8px}
+#sidebarToggle{position:fixed;top:14px;left:14px;z-index:600;width:40px;height:40px;border:0;border-radius:12px;background:var(--c-primary);color:#fff;font-size:20px;font-weight:700;box-shadow:var(--shadow-float);display:none;align-items:center;justify-content:center}
+#sidebarOverlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:499}
+.main{margin-left:var(--sidebar-w);flex:1;min-width:0;padding:22px 26px 40px;display:flex;flex-direction:column;gap:20px}
+.topbar{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-card);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:var(--shadow-card)}
+.topbar-brand{display:flex;align-items:center;gap:14px}
+.topbar-logo{width:52px;height:52px;border-radius:50%;object-fit:contain;background:var(--c-primary-lt);border:2px solid var(--c-primary)}
+.topbar-brand h1{font-size:18px;font-weight:800;color:var(--c-primary-dk);letter-spacing:-.02em}
+.topbar-brand p{font-size:12px;color:var(--c-text-muted);margin-top:2px}
+.topbar-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.status-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:99px;background:var(--c-accent-lt);color:var(--c-accent);font-size:12px;font-weight:800;border:1px solid #bbf7d0}
+.status-pill:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c-accent);box-shadow:0 0 0 5px rgba(22,163,74,.18)}
+.topbar-date{font-size:12px;color:var(--c-text-muted)}
+.hero{background:linear-gradient(135deg,var(--c-primary-dk),var(--c-primary));border-radius:var(--r-card);padding:26px;color:#fff;box-shadow:var(--shadow-card);display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-100px;top:-130px;background:rgba(255,255,255,.08)}
+.hero h2{font-size:28px;font-weight:900;letter-spacing:-.03em;margin-bottom:5px;position:relative;z-index:1}
+.hero p{font-size:13px;line-height:1.7;color:#d1fae5;max-width:760px;position:relative;z-index:1}
+.hero-badge{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900;color:#fff}
+.section-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-card);padding:20px;box-shadow:var(--shadow-card)}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.section-eyebrow{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--c-primary);margin-bottom:4px}
+.section-title{font-size:22px;font-weight:900;color:var(--c-text);letter-spacing:-.025em}
+.section-sub{font-size:13px;color:var(--c-text-muted);line-height:1.6;margin-top:3px}
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.sector-card{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid var(--c-border);border-radius:18px;padding:18px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;min-height:245px;transition:.2s ease}
+.sector-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-float);border-color:var(--c-primary)}
+.sector-icon{width:50px;height:50px;border-radius:16px;background:var(--c-primary-lt);display:grid;place-items:center;font-size:26px;margin-bottom:12px;border:1px solid rgba(15,107,92,.12)}
+.sector-card h3{font-size:17px;font-weight:900;color:var(--c-primary-dk);margin-bottom:7px}
+.sector-card p{font-size:13px;color:var(--c-text-muted);line-height:1.6;flex:1}
+.card-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.card-stats div{background:#fff;border:1px solid var(--c-border);border-radius:12px;padding:10px;min-height:66px}
+.card-stats span{display:block;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--c-text-muted);margin-bottom:4px}
+.card-stats strong{font-size:17px;font-weight:900;color:var(--c-text)}
+.view-btn{margin-top:14px;border:0;border-radius:12px;background:var(--c-primary);color:#fff;font-size:12px;font-weight:900;padding:10px 12px;transition:.15s}
+.view-btn:hover{background:var(--c-primary-dk);transform:translateY(-1px)}
+.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.kpi-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-card);padding:16px;box-shadow:var(--shadow-card)}
+.kpi-top{display:flex;align-items:center;gap:9px;margin-bottom:10px}.kpi-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--c-primary-lt)}
+.kpi-label{font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--c-text-muted)}.kpi-value{font-size:23px;font-weight:900;color:var(--c-text)}
+.dashboard-panel{display:none;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-card);box-shadow:var(--shadow-card);padding:20px;position:relative;overflow:hidden}
+.dashboard-panel.show{display:block}.panel-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:50%;background:var(--c-danger);color:white;font-size:18px;font-weight:900}
+.table-toolbar{display:grid;grid-template-columns:minmax(220px,360px) auto auto;gap:10px;align-items:center;margin:18px 0 14px;padding-right:42px}
+.table-search{height:44px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--c-border);border-radius:12px;padding:0 12px}.table-search input{width:100%;border:0;outline:0;font-size:13px}
+.table-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:11px;color:#fff;font-size:12px;font-weight:900;padding:10px 12px}.export-btn{background:var(--c-blue)}.print-btn{background:var(--c-primary)}
+.table-badge{justify-self:end;background:var(--c-accent-lt);color:#166534;border:1px solid #bbf7d0;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:900}
+.table-wrap{overflow-x:auto;border:1px solid var(--c-border);border-radius:14px}.data-table{min-width:980px}.data-table th,.data-table td{padding:11px 12px;border-bottom:1px solid var(--c-border);font-size:12px;white-space:nowrap;text-align:left}.data-table th{background:var(--c-bg);color:var(--c-text-muted);font-weight:900;text-transform:uppercase;letter-spacing:.06em}.data-table tr:hover td{background:#f8fafc}
+.analysis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.analysis-card{background:#f8fafc;border:1px solid var(--c-border);border-radius:16px;padding:16px}.analysis-card h3{color:var(--c-primary-dk);font-size:16px;font-weight:900;margin-bottom:9px}.analysis-card p,.analysis-card li{color:var(--c-text-2);font-size:13px;line-height:1.7}.analysis-card ul{padding-left:18px}.analysis-card.recommendation{grid-column:1/-1;background:linear-gradient(180deg,#ecfdf5,#fff);border-color:#bbf7d0;border-top:4px solid var(--c-primary)}
+footer{background:var(--c-primary-dk);color:#d1fae5;border-radius:var(--r-card);padding:18px;text-align:center;font-size:12px;font-weight:700}
+@media(max-width:900px){.main{margin-left:0;padding:68px 14px 28px}.sidebar{transform:translateX(-100%)}.sidebar.open{transform:none}#sidebarToggle{display:flex}#sidebarOverlay.show{display:block}.table-toolbar{grid-template-columns:1fr}.table-badge{justify-self:start}.analysis-grid{grid-template-columns:1fr}.analysis-card.recommendation{grid-column:auto}.topbar{align-items:flex-start;flex-direction:column}.sector-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sector-grid{grid-template-columns:1fr}.card-stats{grid-template-columns:1fr}.hero{padding:22px}.hero h2{font-size:23px}.kpi-strip{grid-template-columns:1fr}}
+@media print{body *{visibility:hidden}.print-area,.print-area *{visibility:visible}.print-area{position:absolute;left:0;top:0;width:100%;display:block!important;box-shadow:none!important;border:none!important}.print-area .panel-close,.print-area .table-toolbar{display:none!important}}
+</style>
+</head>
+<body>
+<button id="sidebarToggle" aria-label="Open navigation">☰</button>
+<div id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="tarlacoff.png" alt="Tarlac Province" class="sidebar-logo-img" onerror="this.style.background='#e6f4f1';this.alt='🏛️'">
+    <div class="sidebar-logo-text"><strong>PPDO GIS</strong><span>Tarlac Province</span></div>
+  </div>
+  <div class="sidebar-search"><span>🔍</span><input type="text" id="sidebarSearchInput" placeholder="Search…" autocomplete="off"></div>
+  <nav class="sidebar-nav">
+    <span class="nav-label">Main</span>
+    <a href="dashboardupdated.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a>
+    <a href="economic-sector.html" class="nav-item"><span class="icon">📈</span> Economic Sector</a>
+    <a href="infrastructure.html" class="nav-item"><span class="icon">🏗️</span> Infrastructure</a>
+    <a href="social-sector.html" class="nav-item active"><span class="icon">👥</span> Social Sector</a>
+    <a href="institutional-sector.html" class="nav-item"><span class="icon">🏛️</span> Institutional</a>
+    <hr class="nav-divider">
+    <span class="nav-label">Social Services</span>
+    <a href="#healthPanel" class="nav-item"><span class="icon">🏥</span> Health Services</a>
+    <a href="#educationPanel" class="nav-item"><span class="icon">🏫</span> Education</a>
+    <a href="#seniorPanel" class="nav-item"><span class="icon">🧓</span> Senior Citizens</a>
+    <a href="#youthPanel" class="nav-item"><span class="icon">🧑‍🎓</span> Youth Development</a>
+    <a href="#welfarePanel" class="nav-item"><span class="icon">🤝</span> Social Welfare</a>
+    <hr class="nav-divider">
+    <span class="nav-label">GIS Layers</span>
+    <a href="barangay-clinic.html" class="nav-item"><span class="icon">🏥</span> Barangay Clinics</a>
+    <a href="schools.html" class="nav-item"><span class="icon">🏫</span> Schools</a>
+    <a href="barchart.html" class="nav-item"><span class="icon">📊</span> Bar Charts</a>
+    <a href="piechart.html" class="nav-item"><span class="icon">🥧</span> Pie Charts</a>
+  </nav>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="tarlacoff.png" alt="Tarlac" class="topbar-logo" onerror="this.style.display='none'">
+      <div><h1>Social Sector Dashboard</h1><p>Tarlac Province Social Development Information System</p></div>
+    </div>
+    <div class="topbar-meta"><span class="status-pill">CBMS 2024 Ready</span><span class="topbar-date">Social Services Monitoring</span></div>
+  </header>
+  <section class="hero">
+    <div><h2>👥 Social Sector</h2><p>Monitor health, education, senior citizen services, youth development, social welfare, and community inclusion indicators using the same professional layout as the Infrastructure Dashboard.</p></div>
+    <div class="hero-badge">PPDO · Social Development</div>
+  </section>
+  <section class="kpi-strip">
+    <div class="kpi-card"><div class="kpi-top"><span class="kpi-icon">🏥</span><span class="kpi-label">Health Access</span></div><div class="kpi-value">Provincewide</div></div>
+    <div class="kpi-card"><div class="kpi-top"><span class="kpi-icon">🏫</span><span class="kpi-label">Education</span></div><div class="kpi-value">Schools</div></div>
+    <div class="kpi-card"><div class="kpi-top"><span class="kpi-icon">🧓</span><span class="kpi-label">Senior Support</span></div><div class="kpi-value">Priority</div></div>
+    <div class="kpi-card"><div class="kpi-top"><span class="kpi-icon">🤝</span><span class="kpi-label">Welfare</span></div><div class="kpi-value">Active</div></div>
+  </section>
+  <section class="section-card">
+    <div class="section-head"><div><div class="section-eyebrow">Social Services</div><h2 class="section-title">Tarlac Province Social Sector Cards</h2><p class="section-sub">Click a card to view its table, planning notes, and action recommendations.</p></div></div>
+    <div class="sector-grid">
+      <article class="sector-card" onclick="showPanel('healthPanel')"><div class="sector-icon">🏥</div><h3>Health Services</h3><p>Barangay clinics, access to primary health care, maternal care, immunization, and public health readiness.</p><div class="card-stats"><div><span>Focus</span><strong>Access</strong></div><div><span>Layer</span><strong>Clinics</strong></div></div><button class="view-btn">View Health Data</button></article>
+      <article class="sector-card" onclick="showPanel('educationPanel')"><div class="sector-icon">🏫</div><h3>Education Services</h3><p>School accessibility, learning support, school-age population, and education assistance needs.</p><div class="card-stats"><div><span>Focus</span><strong>Schools</strong></div><div><span>Support</span><strong>Learners</strong></div></div><button class="view-btn">View Education Data</button></article>
+      <article class="sector-card" onclick="showPanel('seniorPanel')"><div class="sector-icon">🧓</div><h3>Senior Citizen Services</h3><p>Senior citizen assistance, ID registration, social pension support, and elderly-friendly services.</p><div class="card-stats"><div><span>Focus</span><strong>ID Cards</strong></div><div><span>Priority</span><strong>Elderly</strong></div></div><button class="view-btn">View Senior Data</button></article>
+      <article class="sector-card" onclick="showPanel('youthPanel')"><div class="sector-icon">🧑‍🎓</div><h3>Youth Development</h3><p>Youth participation, leadership, livelihood training, scholarship support, and community activities.</p><div class="card-stats"><div><span>Focus</span><strong>Youth</strong></div><div><span>Program</span><strong>SK/LYDO</strong></div></div><button class="view-btn">View Youth Data</button></article>
+      <article class="sector-card" onclick="showPanel('welfarePanel')"><div class="sector-icon">🤝</div><h3>Social Welfare</h3><p>Family welfare, vulnerable groups, emergency assistance, livelihood support, and inclusion programs.</p><div class="card-stats"><div><span>Focus</span><strong>Families</strong></div><div><span>Support</span><strong>Assistance</strong></div></div><button class="view-btn">View Welfare Data</button></article>
+      <article class="sector-card" onclick="showPanel('protectionPanel')"><div class="sector-icon">🛡️</div><h3>Community Protection</h3><p>Protection services, disaster-ready communities, child protection, and safe public spaces.</p><div class="card-stats"><div><span>Focus</span><strong>Safety</strong></div><div><span>Action</span><strong>Preparedness</strong></div></div><button class="view-btn">View Protection Data</button></article>
+    </div>
+  </section>
+  <section class="dashboard-panel" id="healthPanel"><button class="panel-close" onclick="closePanel('healthPanel')">×</button><h2 class="section-title">🏥 Health Services by Municipality</h2><p class="section-sub">Sample table structure ready for your CBMS/clinic dataset.</p><div class="table-toolbar"><div class="table-search"><span>🔍</span><input oninput="filterTable('healthPanel',this.value)" placeholder="Search municipality..."></div><div class="table-actions"><button class="btn export-btn" onclick="exportTableCSV('healthTable','health_services.csv')">⬇ Export CSV</button><button class="btn print-btn" onclick="printPanel('healthPanel')">🖨 Print</button></div><span class="table-badge">Health Table</span></div><div class="table-wrap"><table class="data-table" id="healthTable"><thead><tr><th>Municipality</th><th>Health Priority</th><th>Service Focus</th><th>Planning Action</th></tr></thead><tbody><tr><td>Anao</td><td>Primary care access</td><td>Barangay health services</td><td>Strengthen BHW support and medicine availability</td></tr><tr><td>Bamban</td><td>Clinic accessibility</td><td>Maternal and child health</td><td>Improve referral and monitoring system</td></tr><tr><td>City of Tarlac</td><td>High service demand</td><td>Urban health facilities</td><td>Expand service capacity and digital tracking</td></tr></tbody></table></div></section>
+  <section class="dashboard-panel" id="educationPanel"><button class="panel-close" onclick="closePanel('educationPanel')">×</button><h2 class="section-title">🏫 Education Services</h2><p class="section-sub">Use this panel for school access, learner support, and education assistance data.</p><div class="table-toolbar"><div class="table-search"><span>🔍</span><input oninput="filterTable('educationPanel',this.value)" placeholder="Search municipality..."></div><div class="table-actions"><button class="btn export-btn" onclick="exportTableCSV('educationTable','education_services.csv')">⬇ Export CSV</button><button class="btn print-btn" onclick="printPanel('educationPanel')">🖨 Print</button></div><span class="table-badge">Education Table</span></div><div class="table-wrap"><table class="data-table" id="educationTable"><thead><tr><th>Municipality</th><th>Education Need</th><th>Target Group</th><th>Recommendation</th></tr></thead><tbody><tr><td>Camiling</td><td>School support</td><td>Students</td><td>Improve scholarship and transport assistance</td></tr><tr><td>Capas</td><td>Learning access</td><td>Remote barangays</td><td>Map underserved school-age population</td></tr><tr><td>Concepcion</td><td>Completion support</td><td>Youth learners</td><td>Strengthen dropout prevention programs</td></tr></tbody></table></div></section>
+  <section class="dashboard-panel" id="seniorPanel"><button class="panel-close" onclick="closePanel('seniorPanel')">×</button><h2 class="section-title">🧓 Senior Citizen Services</h2><p class="section-sub">Use this section for senior population, with ID, without ID, and assistance planning.</p><div class="table-toolbar"><div class="table-search"><span>🔍</span><input oninput="filterTable('seniorPanel',this.value)" placeholder="Search municipality..."></div><div class="table-actions"><button class="btn export-btn" onclick="exportTableCSV('seniorTable','senior_services.csv')">⬇ Export CSV</button><button class="btn print-btn" onclick="printPanel('seniorPanel')">🖨 Print</button></div><span class="table-badge">Senior Table</span></div><div class="table-wrap"><table class="data-table" id="seniorTable"><thead><tr><th>Municipality</th><th>Program Focus</th><th>Priority</th><th>Recommendation</th></tr></thead><tbody><tr><td>Gerona</td><td>Senior ID registration</td><td>High</td><td>Conduct mobile ID registration per barangay</td></tr><tr><td>La Paz</td><td>Social pension tracking</td><td>Medium</td><td>Update beneficiary database quarterly</td></tr><tr><td>Paniqui</td><td>Health and wellness</td><td>High</td><td>Expand elderly wellness services</td></tr></tbody></table></div></section>
+  <section class="dashboard-panel" id="youthPanel"><button class="panel-close" onclick="closePanel('youthPanel')">×</button><h2 class="section-title">🧑‍🎓 Youth Development</h2><p class="section-sub">Youth sector table for SK/LYDO programs, skills training, and participation.</p><div class="table-toolbar"><div class="table-search"><span>🔍</span><input oninput="filterTable('youthPanel',this.value)" placeholder="Search municipality..."></div><div class="table-actions"><button class="btn export-btn" onclick="exportTableCSV('youthTable','youth_development.csv')">⬇ Export CSV</button><button class="btn print-btn" onclick="printPanel('youthPanel')">🖨 Print</button></div><span class="table-badge">Youth Table</span></div><div class="table-wrap"><table class="data-table" id="youthTable"><thead><tr><th>Municipality</th><th>Youth Concern</th><th>Program</th><th>Planning Action</th></tr></thead><tbody><tr><td>Mayantoc</td><td>Skills development</td><td>Training</td><td>Provide digital and livelihood workshops</td></tr><tr><td>Moncada</td><td>Youth participation</td><td>Leadership</td><td>Strengthen barangay youth councils</td></tr><tr><td>Ramos</td><td>Employment readiness</td><td>Career support</td><td>Link youth to PESO programs</td></tr></tbody></table></div></section>
+  <section class="dashboard-panel" id="welfarePanel"><button class="panel-close" onclick="closePanel('welfarePanel')">×</button><h2 class="section-title">🤝 Social Welfare</h2><p class="section-sub">Family welfare, vulnerable group support, and assistance monitoring.</p><div class="table-toolbar"><div class="table-search"><span>🔍</span><input oninput="filterTable('welfarePanel',this.value)" placeholder="Search municipality..."></div><div class="table-actions"><button class="btn export-btn" onclick="exportTableCSV('welfareTable','social_welfare.csv')">⬇ Export CSV</button><button class="btn print-btn" onclick="printPanel('welfarePanel')">🖨 Print</button></div><span class="table-badge">Welfare Table</span></div><div class="table-wrap"><table class="data-table" id="welfareTable"><thead><tr><th>Municipality</th><th>Welfare Need</th><th>Target Group</th><th>Recommendation</th></tr></thead><tbody><tr><td>San Clemente</td><td>Emergency assistance</td><td>Low-income families</td><td>Improve validation and response tracking</td></tr><tr><td>San Manuel</td><td>Family welfare</td><td>Households</td><td>Prioritize vulnerable household mapping</td></tr><tr><td>Santa Ignacia</td><td>Livelihood support</td><td>Qualified beneficiaries</td><td>Connect assistance with livelihood programs</td></tr></tbody></table></div></section>
+  <section class="dashboard-panel" id="protectionPanel"><button class="panel-close" onclick="closePanel('protectionPanel')">×</button><h2 class="section-title">🛡️ Community Protection</h2><p class="section-sub">Public safety and protection support design panel.</p><div class="table-toolbar"><div class="table-search"><span>🔍</span><input oninput="filterTable('protectionPanel',this.value)" placeholder="Search municipality..."></div><div class="table-actions"><button class="btn export-btn" onclick="exportTableCSV('protectionTable','community_protection.csv')">⬇ Export CSV</button><button class="btn print-btn" onclick="printPanel('protectionPanel')">🖨 Print</button></div><span class="table-badge">Protection Table</span></div><div class="table-wrap"><table class="data-table" id="protectionTable"><thead><tr><th>Municipality</th><th>Protection Focus</th><th>Risk Area</th><th>Planning Action</th></tr></thead><tbody><tr><td>Pura</td><td>Child protection</td><td>Barangay level</td><td>Strengthen reporting and referral system</td></tr><tr><td>Victoria</td><td>Disaster readiness</td><td>Households</td><td>Conduct community preparedness trainings</td></tr><tr><td>City of Tarlac</td><td>Urban safety</td><td>High-density areas</td><td>Improve coordination with barangay responders</td></tr></tbody></table></div></section>
+  <section class="section-card">
+    <div class="section-head"><div><div class="section-eyebrow">Planning Analysis</div><h2 class="section-title">Social Sector Planning Recommendation</h2><p class="section-sub">Use this as the interpretation block for your dashboard.</p></div></div>
+    <div class="analysis-grid">
+      <div class="analysis-card"><h3>Health</h3><p>Prioritize accessible barangay-level health services, medicine availability, and referral systems for communities far from major facilities.</p></div>
+      <div class="analysis-card"><h3>Education</h3><p>Support school-age children through scholarship, transportation, learning recovery, and dropout-prevention programs.</p></div>
+      <div class="analysis-card"><h3>Senior Citizens</h3><p>Update senior citizen records, improve ID registration, monitor social pension eligibility, and provide regular health and wellness activities.</p></div>
+      <div class="analysis-card"><h3>Youth and Welfare</h3><p>Strengthen youth skills training, livelihood pathways, family assistance validation, and protection services for vulnerable groups.</p></div>
+      <div class="analysis-card recommendation"><h3>Recommended Priority Action</h3><ul><li>Build a unified social services database per municipality and barangay.</li><li>Connect CBMS indicators with health, education, senior citizen, youth, and welfare programs.</li><li>Use GIS mapping to identify underserved barangays and prioritize intervention.</li><li>Schedule quarterly monitoring for beneficiaries and service gaps.</li></ul></div>
+    </div>
+  </section>
+  <footer>PPDO GIS Dashboard · Social Sector Design · Tarlac Province</footer>
+</main>
+<script>
+const sidebar=document.getElementById('sidebar');
+const sidebarToggle=document.getElementById('sidebarToggle');
+const sidebarOverlay=document.getElementById('sidebarOverlay');
+sidebarToggle.addEventListener('click',()=>{sidebar.classList.toggle('open');sidebarOverlay.classList.toggle('show')});
+sidebarOverlay.addEventListener('click',()=>{sidebar.classList.remove('open');sidebarOverlay.classList.remove('show')});
+function showPanel(id){
+  document.querySelectorAll('.dashboard-panel').forEach(panel=>panel.classList.remove('show'));
+  const panel=document.getElementById(id);
+  if(panel){panel.classList.add('show');panel.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function closePanel(id){document.getElementById(id)?.classList.remove('show')}
+function filterTable(panelId,value){
+const panel=document.getElementById(panelId); if(!panel)return;
+const rows=panel.querySelectorAll('tbody tr'); const q=value.toLowerCase().trim();
+rows.forEach(row=>{row.style.display=row.textContent.toLowerCase().includes(q)?'':'none'});
+}
+function exportTableCSV(tableId,filename){
+const table=document.getElementById(tableId); if(!table)return;
+const rows=[...table.querySelectorAll('tr')].filter(row=>row.style.display!=='none');
+const csv=rows.map(row=>[...row.children].map(cell=>'"'+cell.textContent.replaceAll('"','""').trim()+'"').join(',')).join('\n');
+const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+const link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download=filename; link.click(); URL.revokeObjectURL(link.href);
+}
+function printPanel(panelId){
+const panel=document.getElementById(panelId); if(!panel)return;
+panel.classList.add('print-area'); window.print(); setTimeout(()=>panel.classList.remove('print-area'),500);
+}
+</script>
+</body>
+</html>
